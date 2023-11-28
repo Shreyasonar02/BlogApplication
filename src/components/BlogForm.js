@@ -3,7 +3,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom'; 
 import '../styles/BlogForm.css';
+import { createPost } from '../services/api';
 
 const schema = Yup.object().shape({
   title: Yup.string().required('Title is required'),
@@ -16,16 +18,23 @@ const BlogForm = ({ addBlog }) => {
   });
 
   const [isModalOpen, setModalOpen] = useState(false);
-
+  const navigate = useNavigate(); 
   const openModal = () => setModalOpen(true);
   const closeModal = () => {
     setModalOpen(false);
     reset();
   };
 
-  const onSubmit = (data) => {
-    addBlog({ blog: data });
-    closeModal();
+  const onSubmit = async (data) => {
+    try {
+      const newBlog = await createPost(data);
+      addBlog(newBlog);
+      closeModal();
+     
+      navigate('/'); 
+    } catch (error) {
+      console.error('Error creating blog:', error);
+    }
   };
 
   return (
