@@ -58,7 +58,7 @@ const App = () => {
   return (
     <Router>
       <div className="body" style={{ backgroundImage: 'url("src/landing.jpg")', backgroundSize: 'cover' }}>
-        <div className="Task-Bar" style={{ backgroundColor: 'black', color: 'white', padding: '25px' }}>
+        <div className="Task-Bar" style={{ backgroundColor: '#27b9ab', color: 'white', padding: '25px' }}>
           <h1>Blog Posts</h1>
           <div className='Content' style={{ marginTop: '10px' }}>
             <Link to="/">
