@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import '../styles/Search.css';
+
 
 const Search = ({ blogs }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -14,11 +16,11 @@ const Search = ({ blogs }) => {
   };
 
   const renderPosts = (posts) =>
-    posts.map((blog, index) => (
+    posts.map(({ title, body, date }, index) => (
       <div key={index} className="Post">
-        <h3>{blog.title}</h3>
-        <p>{blog.body}</p>
-        <p>Date: {new Date(blog.date).toLocaleDateString()}</p>
+        <h3>{title}</h3>
+        <p>{body}</p>
+        <p>Date: {new Date(date).toLocaleDateString()}</p>
       </div>
     ));
 
